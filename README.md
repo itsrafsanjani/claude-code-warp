@@ -25,9 +25,11 @@ This powers Warp's inline status indicators for Claude Code sessions.
 
 ## Installation
 
+Install this fork (includes `AskUserQuestion` and `ExitPlanMode` notifications):
+
 ```bash
 # In Claude Code, add the marketplace
-/plugin marketplace add warpdotdev/claude-code-warp
+/plugin marketplace add itsrafsanjani/claude-code-warp
 
 # Install the Warp plugin
 /plugin install warp@claude-code-warp
@@ -36,6 +38,8 @@ This powers Warp's inline status indicators for Claude Code sessions.
 > ⚠️ **Important**: After installing, **restart Claude Code or run /reload-plugins** for the plugin to activate.
 
 Once restarted, you'll see a confirmation message and notifications will appear automatically.
+
+If you'd rather use the upstream version, swap `itsrafsanjani` for `warpdotdev` in the marketplace command.
 
 ## Requirements
 
@@ -72,7 +76,7 @@ Notifications work out of the box. To customize Warp's notification behavior (so
 
 ```bash
 /plugin uninstall warp@claude-code-warp
-/plugin marketplace remove claude-code-warp
+/plugin marketplace remove itsrafsanjani/claude-code-warp
 ```
 
 ## Versioning
