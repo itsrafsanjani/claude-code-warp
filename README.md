@@ -2,6 +2,8 @@
 
 Official [Warp](https://warp.dev) terminal integration for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
+> **Fork notice:** This is a fork of [warpdotdev/claude-code-warp](https://github.com/warpdotdev/claude-code-warp) maintained at [itsrafsanjani/claude-code-warp](https://github.com/itsrafsanjani/claude-code-warp). It adds Warp notifications for the `AskUserQuestion` and `ExitPlanMode` (confirm-plan) tools, which the upstream plugin does not yet cover.
+
 ## Features
 
 ### 🔔 Native Notifications
@@ -47,13 +49,15 @@ The plugin communicates with Warp via OSC 777 escape sequences. Each hook script
 
 Payloads include a protocol version negotiated between the plugin and Warp (`min(plugin_version, warp_version)`), the session ID, working directory, and event-specific fields.
 
-The plugin registers six hooks:
+The plugin registers the following hooks:
 - **SessionStart** — emits the plugin version and a welcome system message
 - **Stop** — reads the transcript to extract your prompt and Claude's response, then sends a task-complete notification
 - **Notification** (`idle_prompt`) — fires when Claude has been idle and needs your input
 - **PermissionRequest** — fires when Claude wants to run a tool, includes the tool name and a preview of its input
 - **UserPromptSubmit** — fires when you submit a prompt, signaling the session is active again
 - **PostToolUse** — fires when a tool call completes, signaling the session is no longer blocked
+- **PreToolUse** (`AskUserQuestion`) — fires when Claude asks you a question via the AskUserQuestion tool; surfaces the first question's text
+- **PreToolUse** (`ExitPlanMode`) — fires when Claude finishes planning and waits for your approval (the "confirm plan" UI); surfaces the plan's title
 
 ### Legacy Support
 
